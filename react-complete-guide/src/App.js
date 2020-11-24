@@ -45,11 +45,21 @@ class App extends Component {
   //don't add parentheses! it will run automatically after rendering!
   // <button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name</button>  CAN BE INEFITIENT
   render() {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
 
-        <button onClick={() => this.switchNameHandler("Maximilian!!")}>
+        <button 
+          style={style}
+          onClick={() => this.switchNameHandler("Maximilian!!")}>
           Switch Name
         </button>
         <Person
