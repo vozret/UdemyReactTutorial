@@ -18,19 +18,6 @@ class App extends Component {
   };
 
   // if we don't use arrow function, possible problems with "this"
-  switchNameHandler = (newName) => {
-    //console.log("Was clicked!");
-    // DON'T DO THIS!  this.state.persons[0].name = 'Maximilian'
-    // has {} in it's argument, merges everything we put inside with our existing state
-    // rerendering caused only by changing state and props
-    this.setState({
-      persons: [
-        { name: newName, age: 28 },
-        { name: "Manu", age: 29 },
-        { name: "Stephanie", age: 27 },
-      ],
-    });
-  };
 
   nameChangedHandler = (event) => {
     this.setState({
@@ -41,6 +28,14 @@ class App extends Component {
       ],
     });
   };
+
+  deletePersonHandler = (personIndex) => {
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({
+      persons: persons
+    })
+  }
 
   //togglePersonsHandler(){} problems with 'this'
 
@@ -63,13 +58,15 @@ class App extends Component {
 
     let persons = null;
 
+    // index element in the map() is passed here automatically
     if(this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
+          {this.state.persons.map((person, index) => {
             return <Person
             name={person.name}
             age={person.age}
+            click={() => this.deletePersonHandler(index)}
           />
           })}
         </div>
