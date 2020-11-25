@@ -30,11 +30,15 @@ class App extends Component {
   };
 
   deletePersonHandler = (personIndex) => {
-    const persons = this.state.persons;
+    // in JS, objects and arrays are reference types
+    // in splice() we already mutated the original data
+    // good practice to create a copy before mutating it
+    // slice() method
+    const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({
       persons: persons
-    })
+    });
   }
 
   //togglePersonsHandler(){} problems with 'this'
