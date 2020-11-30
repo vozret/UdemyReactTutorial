@@ -8,6 +8,7 @@ const Person = (props) => {
   // {} for dynamic content in a jsx file
   // children reffers to any element between opening and closing tag
 
+  console.log('[Persons.js] rendering...');
   return (
     //<div className="Person" style={style}>
     <div className={classes.Person}>

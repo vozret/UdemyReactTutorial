@@ -8,6 +8,12 @@ import classes from "./App.css";
 class App extends Component {
   // stateful, smart or container, compontent -> manages state
   // good to have only a couple of them
+  constructor(props) {
+    super(props);
+
+    console.log('[App.js] constructor');
+  }
+
   state = {
     persons: [
       { id: "sasasa", name: "Max", age: 28 },
@@ -17,6 +23,15 @@ class App extends Component {
     otherState: "some other value",
     showPersons: false,
   };
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js] ComponentDidMount');
+  }
 
   // if we don't use arrow function, possible problems with "this"
 
@@ -65,6 +80,7 @@ class App extends Component {
   //don't add parentheses! it will run automatically after rendering!
   // <button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name</button>  CAN BE INEFITIENT
   render() {
+    console.log('[App.js] render')
     let persons = null;
 
     // index element in the map() is passed here automatically
@@ -81,6 +97,7 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <Cockpit
+        title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}
