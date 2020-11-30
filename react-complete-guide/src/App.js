@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Person from "./Person/Person";
 
-import "./App.css";
+import classes from "./App.css";
 
 class App extends Component {
   // stateful, smart or container, compontent -> manages state
@@ -66,6 +66,7 @@ class App extends Component {
   render() {
 
     let persons = null;
+    let btnClass = [classes.Button];
 
     // index element in the map() is passed here automatically
     if (this.state.showPersons) {
@@ -84,21 +85,23 @@ class App extends Component {
           })}
         </div>
       );
+
+      btnClass.push(classes.Red);
     }
 
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push("red"); // classes = ['red']
+      assignedClasses.push(classes.red); // classes = ['red']
     }
     if (this.state.persons.length <= 1) {
-      classes.push("bold"); // classes = ['red', 'bold']
+      assignedClasses.push(classes.bold); // classes = ['red', 'bold']
     }
 
     return (
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hi, I'm a React App</h1>
-          <p className={classes.join(" ")}>This really works!</p>
-          <button className="button" onClick={this.togglePersonsHandler}>
+          <p className={assignedClasses.join(" ")}>This really works!</p>
+          <button className={btnClass.join(' ')} onClick={this.togglePersonsHandler}>
             Toggle Persons
           </button>
           {persons}
