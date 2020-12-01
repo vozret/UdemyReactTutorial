@@ -72,6 +72,8 @@ class App extends Component {
     // in splice() we already mutated the original data
     // good practice to create a copy before mutating it
     // slice() method
+    // we create the copy on the other place in memory
+    // shouldComponentUpdate in Persons.js is true!
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({
