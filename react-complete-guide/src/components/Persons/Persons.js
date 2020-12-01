@@ -11,7 +11,7 @@ class Persons extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     console.log("[Persons.js] shouldComponentUpdate...");
     // we compare the pointers!!!! not the values!
-    // google chrome dev tools -> rendering, to see what will change
+    // google chrome dev tools -> rendering -> paint flashing, to see what will change
     if(nextProps.persons !== this.props.persons){
       return true;
     } else {
