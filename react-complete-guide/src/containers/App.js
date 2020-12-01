@@ -33,6 +33,15 @@ class App extends Component {
     console.log('[App.js] ComponentDidMount');
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log('[App.js] ComponentDidUpdate');
+  }
+
   // if we don't use arrow function, possible problems with "this"
 
   nameChangedHandler = (event, id) => {
