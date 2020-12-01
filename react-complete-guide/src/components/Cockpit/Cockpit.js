@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import classes from "./Cockpit.css";
 
@@ -7,6 +7,18 @@ import classes from "./Cockpit.css";
   // {} for dynamic content in a jsx file
   // children reffers to any element between opening and closing tag
 const Cockpit = (props) => {
+  // useEffect -> takes a function for every render cycle
+  // also runs when component is created
+  // combines componentDidMount and componentDidUpdate
+  // second parameter -> to know when to run useEffect(), [props.persons] -> change in the state; [] -> runs only for the first time
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect...');
+    //Http request...
+    setTimeout(() => {
+      alert('Saved data to cloud');
+    }, 1000)
+  }, []);
+
   const assignedClasses = [];
   let btnClass = "";
 
