@@ -2,6 +2,10 @@ import React from "react";
 
 import classes from "./Cockpit.css";
 
+  // stateless, dumb or prezentational, component, doesn't manage state
+  // good to have a lot of them, easy to change and manage
+  // {} for dynamic content in a jsx file
+  // children reffers to any element between opening and closing tag
 const Cockpit = (props) => {
   const assignedClasses = [];
   let btnClass = "";
