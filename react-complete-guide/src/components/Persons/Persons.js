@@ -1,23 +1,30 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Person from "./Person/Person";
 
 // => () -> automatically returns things in props
-class Persons extends Component {
+class Persons extends PureComponent {
   /*static getDerivedStateFromProps(props, state) {
     console.log("[Persons.js] getDerivedStateFromProps...");
     return state;
   }*/
 
-  shouldComponentUpdate(nextProps, nextState) {
+/*  shouldComponentUpdate(nextProps, nextState) {
     console.log("[Persons.js] shouldComponentUpdate...");
     // we compare the pointers!!!! not the values!
     // google chrome dev tools -> rendering -> paint flashing, to see what will change
-    if(nextProps.persons !== this.props.persons){
+    if(
+      nextProps.persons !== this.props.persons ||
+      nextProps.changed !== this.props.changed ||
+      nextProps.clicked !== this.props.clicked){
       return true;
     } else {
       return false;
     }
   }
+  */
+ // If we want to check all the props for rerendering, we don't use shouldComponentUpdate
+ // but use PureComponent
+
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log("[Persons.js] getSnapshotBeforeUpdate...");
