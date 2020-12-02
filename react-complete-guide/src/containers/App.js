@@ -2,10 +2,11 @@ import React, { Component } from "react";
 
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
-import withClass from '../hoc/withClass';
+import withClass from "../hoc/withClass";
+import AuthContext from "../context/auth-context";
+import Aux from "../hoc/Aux";
 
 import classes from "./App.css";
-import Aux from "../hoc/Aux";
 
 class App extends Component {
   // stateful, smart or container, compontent -> manages state
@@ -13,7 +14,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    console.log('[App.js] constructor');
+    console.log("[App.js] constructor");
   }
 
   state = {
@@ -25,25 +26,26 @@ class App extends Component {
     otherState: "some other value",
     showPersons: false,
     showCockpit: true,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   };
 
   static getDerivedStateFromProps(props, state) {
-    console.log('[App.js] getDerivedStateFromProps', props);
+    console.log("[App.js] getDerivedStateFromProps", props);
     return state;
   }
 
   componentDidMount() {
-    console.log('[App.js] ComponentDidMount');
+    console.log("[App.js] ComponentDidMount");
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('[App.js] shouldComponentUpdate');
+    console.log("[App.js] shouldComponentUpdate");
     return true;
   }
 
   componentDidUpdate() {
-    console.log('[App.js] ComponentDidUpdate');
+    console.log("[App.js] ComponentDidUpdate");
   }
 
   // if we don't use arrow function, possible problems with "this"
@@ -66,11 +68,11 @@ class App extends Component {
 
     // better way of updating the state when we depend
     // on the old state
-    this.setState((prevState, props) => { 
+    this.setState((prevState, props) => {
       return {
         persons: persons,
-        changeCounter: prevState.changeCounter + 1
-      }
+        changeCounter: prevState.changeCounter + 1,
+      };
       // left: state, right: new copy
     });
   };
@@ -96,11 +98,17 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   };
 
+  loginHandler = () => {
+    this.setState({
+      authenticated: true
+    });
+  }
+
   //this reffers to a class
   //don't add parentheses! it will run automatically after rendering!
   // <button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name</button>  CAN BE INEFITIENT
   render() {
-    console.log('[App.js] render')
+    console.log("[App.js] render");
     let persons = null;
 
     // index element in the map() is passed here automatically
@@ -116,14 +124,28 @@ class App extends Component {
 
     return (
       <Aux>
-        <button onClick={()=>{this.setState({showCockpit: false});}}>Remove cockpit</button>
-        {this.state.showCockpit ? <Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          personsLength={this.state.persons.length}
-          clicked={this.togglePersonsHandler}
-        /> : null}
-        {persons}
+        <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}
+        >
+          Remove cockpit
+        </button>
+        <AuthContext.Provider value={{
+          authenticated: this.state.authenticated, 
+          login: this.loginHandler
+          }}
+        >
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              clicked={this.togglePersonsHandler}
+            />
+          ) : null}
+          {persons}
+        </AuthContext.Provider>
       </Aux>
     );
   }
