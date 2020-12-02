@@ -43,6 +43,8 @@ class Persons extends PureComponent {
 
   render() {
     console.log("[Persons.js] rendering...");
+    // this is technically one element with multiple items
+    // plus they have a KEY
     return this.props.persons.map((person, index) => {
       return (
         <Person
