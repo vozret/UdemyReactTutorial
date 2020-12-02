@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 
 import classes from "./Cockpit.css";
 
@@ -7,6 +7,8 @@ import classes from "./Cockpit.css";
   // {} for dynamic content in a jsx file
   // children reffers to any element between opening and closing tag
 const Cockpit = (props) => {
+  const toggleBtnRef = useRef(null);
+
   // useEffect -> takes a function for every render cycle
   // also runs when component is created
   // combines componentDidMount and componentDidUpdate
@@ -15,9 +17,7 @@ const Cockpit = (props) => {
     console.log('[Cockpit.js] useEffect...');
     //Http request...
     // const timer = 
-    setTimeout(() => {
-      //alert('Saved data to cloud');
-    }, 1000); 
+    toggleBtnRef.current.click();
     // runs BEFORE the main useEffect function runs but AFTER the (first) render cycle!
     return () => {
       //clearTimeout(timer);
@@ -52,6 +52,7 @@ const Cockpit = (props) => {
       <h1>{props.title}</h1>
       <p className={assignedClasses.join(" ")}>This really works!</p>
       <button
+        ref={toggleBtnRef}
         className={btnClass}
         onClick={props.clicked}
       >
