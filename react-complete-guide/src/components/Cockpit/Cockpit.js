@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useContext} from "react";
 import AuthContext from '../../context/auth-context';
 
 import classes from "./Cockpit.css";
@@ -9,6 +9,9 @@ import classes from "./Cockpit.css";
   // children reffers to any element between opening and closing tag
 const Cockpit = (props) => {
   const toggleBtnRef = useRef(null);
+  const authContext = useContext(AuthContext);
+
+  console.log(authContext.authenticated);
 
   // useEffect -> takes a function for every render cycle
   // also runs when component is created
@@ -59,9 +62,8 @@ const Cockpit = (props) => {
       >
         Toggle Persons
       </button>
-      <AuthContext.Consumer>
-        {(context) => <button onClick={context.login}>Log in</button>}
-      </AuthContext.Consumer>
+
+        <button onClick={authContext.login}>Log in</button>
     </div>
   );
 };
