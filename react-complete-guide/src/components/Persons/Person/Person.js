@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Aux from "../../../hoc/Aux";
+//import Aux from "../../../hoc/Aux";
 
 //import classes from "./Person.css";
 
@@ -9,7 +9,8 @@ class Person extends Component {
     return (
       //<div className="Person" style={style}>
       //<div className={classes.Person}>
-      <Aux>
+      // React.Fragment = Aux
+      <React.Fragment>
         <p onClick={this.props.click}>
           I am a {this.props.name} and I am {this.props.age} years old.
         </p>
@@ -19,7 +20,7 @@ class Person extends Component {
           onChange={this.props.changed}
           value={this.props.name}
         />
-      </Aux>
+      </React.Fragment>
       //</div>
     );
   }
