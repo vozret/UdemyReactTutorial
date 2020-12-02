@@ -10,9 +10,10 @@ const withClass = props => (
 
 const withClass = (WrappedCopmonent, className) => {
     // function which returns a functional component
+    // props!
     return props => (
         <div className={className}>
-            <WrappedCopmonent />
+            <WrappedCopmonent {...props} />
         </div>
     );
 }
