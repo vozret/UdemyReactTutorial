@@ -9,6 +9,9 @@ const withErrorHandler = (WrappedComponent, axios) => {
             error: null
         }
 
+        // in the tutorial:
+        // componentDidMount -> componentWillMount
+        // but it will soon be deprecated
         componentDidMount() {
             // to clear any errors
             axios.interceptors.request.use(req => {
